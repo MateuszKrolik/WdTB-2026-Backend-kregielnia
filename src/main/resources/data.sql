@@ -22,7 +22,25 @@ values ('Marek Zieliński', 'marek.zielinski@example.com', '600100200', '2026-10
        ('Katarzyna Lis', 'katarzyna.lis@example.com', null, '2026-10-12', null, null, null),
        ('Tomasz Wójcik', 'tomasz.wojcik@example.com', '600500600', '2026-10-20', 'Świdnicka 3/4', 'Wrocław', '50-066');
 
+insert into extra (name, description, price, available)
+values ('Wypożyczenie butów', 'para butów kręglarskich', 8.00, true),
+       ('Pizza', 'pizza 30 cm do wyboru', 35.00, true),
+       ('Napój', 'napój 0,5 l', 9.00, true);
+
 insert into booking (start_at, duration_hours, players, status, total_price, lane_id, customer_id)
 values ('2026-11-14 18:00:00', 2, 4, 'CONFIRMED', 80.00, 1, 1),
        ('2026-11-14 20:00:00', 1, 6, 'PENDING', 40.00, 2, 2),
-       ('2026-11-15 17:00:00', 2, 8, 'CANCELLED', 120.00, 3, 3);
+       ('2026-11-15 17:00:00', 2, 8, 'CANCELLED', 120.00, 3, 3),
+       ('2026-11-07 19:00:00', 2, 4, 'COMPLETED', 80.00, 1, 2),
+       ('2026-11-08 18:00:00', 1, 6, 'COMPLETED', 40.00, 2, 3);
+
+insert into payment (amount, method, paid_at, receipt_number, booking_id, received_by_id)
+values (80.00, 'CARD', '2026-11-12 10:15:00', 'PAY-0001', 1, 5),
+       (80.00, 'CASH', '2026-11-07 21:05:00', 'PAY-0002', 4, 6),
+       (40.00, 'BLIK', '2026-11-08 19:10:00', 'PAY-0003', 5, 7);
+
+insert into booking_extra (booking_id, extra_id)
+values (1, 1),
+       (1, 2),
+       (4, 1),
+       (5, 3);

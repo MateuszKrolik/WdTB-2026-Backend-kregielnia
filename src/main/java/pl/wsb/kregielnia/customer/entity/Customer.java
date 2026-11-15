@@ -3,12 +3,18 @@ package pl.wsb.kregielnia.customer.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import pl.wsb.kregielnia.booking.entity.Booking;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Klient kręgielni. */
 @Entity
@@ -33,6 +39,9 @@ public class Customer {
 
     @Embedded
     private Address address;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Booking> bookings = new ArrayList<>();
 
     protected Customer() {
     }
@@ -67,5 +76,9 @@ public class Customer {
 
     public Address getAddress() {
         return address;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
     }
 }

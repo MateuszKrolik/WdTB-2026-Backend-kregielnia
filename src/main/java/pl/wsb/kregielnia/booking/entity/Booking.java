@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -17,6 +19,8 @@ import pl.wsb.kregielnia.lane.entity.BowlingLane;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Rezerwacja toru przez klienta. */
 @Entity
@@ -50,6 +54,12 @@ public class Booking {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "booking_extra",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "extra_id"))
+    private List<Extra> extras = new ArrayList<>();
 
     protected Booking() {
     }
@@ -95,5 +105,9 @@ public class Booking {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public List<Extra> getExtras() {
+        return extras;
     }
 }
