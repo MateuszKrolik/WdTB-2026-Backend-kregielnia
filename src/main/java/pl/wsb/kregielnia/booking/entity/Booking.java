@@ -4,15 +4,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import pl.wsb.kregielnia.customer.entity.Customer;
+import pl.wsb.kregielnia.lane.entity.BowlingLane;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/** Rezerwacja toru. Powiązania z torem i klientem dojdą na kolejnych laboratoriach. */
+/** Rezerwacja toru przez klienta. */
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -37,16 +43,26 @@ public class Booking {
     @Column(name = "total_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalPrice;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "lane_id", nullable = false)
+    private BowlingLane lane;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
     protected Booking() {
     }
 
     public Booking(LocalDateTime startAt, Integer durationHours, Integer players,
-                   BookingStatus status, BigDecimal totalPrice) {
+                   BookingStatus status, BigDecimal totalPrice, BowlingLane lane, Customer customer) {
         this.startAt = startAt;
         this.durationHours = durationHours;
         this.players = players;
         this.status = status;
         this.totalPrice = totalPrice;
+        this.lane = lane;
+        this.customer = customer;
     }
 
     public Long getId() {
@@ -71,5 +87,13 @@ public class Booking {
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
+    }
+
+    public BowlingLane getLane() {
+        return lane;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 }
