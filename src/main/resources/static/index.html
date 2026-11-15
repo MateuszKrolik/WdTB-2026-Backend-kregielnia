@@ -57,7 +57,7 @@
     <ul>
       <li><b>LAB 01:</b> nazwa projektu (pakiet <code>pl.wsb.kregielnia</code>), wersja z numerami indeksów, konta zespołu, wizytówka</li>
       <li><b>LAB 02:</b> 3 encje: <code>bowling_lane</code> (tory), <code>booking</code> (rezerwacje, status jako enum), <code>customer</code> (klienci, adres jako klasa wbudowana) oraz dane startowe w <code>data.sql</code></li>
-      <li><b>LAB 03:</b> relacje: rezerwacja (<code>booking</code>) wskazuje na tor i klienta (<code>@ManyToOne</code>), klient ma wiele rezerwacji (<code>@OneToMany</code>), płatność jest powiązana 1:1 z rezerwacją i z kontem pracownika, rezerwacje mają dodatki (<code>@ManyToMany</code>); nowe tabele <code>extra</code> i <code>payment</code>, schemat w <code>SCHEMAT.md</code></li>
+      <li><b>LAB 03:</b> relacje: rezerwacja (<code>booking</code>) wskazuje na tor i klienta (<code>@ManyToOne</code>), klient ma wiele rezerwacji (<code>@OneToMany</code>), płatność jest powiązana 1:1 z rezerwacją i z kontem pracownika, rezerwacje mają dodatki (<code>@ManyToMany</code>); nowe tabele <code>extra</code> i <code>payment</code>, schemat w <code>SCHEMAT.md</code>, wszystkie relacje <code>LAZY</code>, repozytorium <code>BookingRepository</code> z zapytaniem <code>findByCustomer_FullName</code></li>
     </ul>
     <p class="muted">Na kolejnych laboratoriach dopisujcie tu kolejne punkty.</p>
   </section>
